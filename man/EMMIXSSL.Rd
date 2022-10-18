@@ -2,7 +2,7 @@
 % Please edit documentation in R/EMMIXSSL.R
 \name{EMMIXSSL}
 \alias{EMMIXSSL}
-\title{Fitting Gaussian mixture model to the incompleted dataset with missing-data mechanism}
+\title{Fitting Gaussian mixture models}
 \usage{
 EMMIXSSL(
   dat,
@@ -15,28 +15,30 @@ EMMIXSSL(
   type,
   iter.max = 500,
   eval.max = 500,
-  rel.tol = 1e-15,
+  rel.tol = 1e-06,
   sing.tol = 1e-20
 )
 }
 \arguments{
 \item{dat}{An \eqn{n\times p} matrix where each row represents an individual observation}
 
-\item{zm}{An n-dimensional vector of group partition including the missing-label, denoted as NA.}
+\item{zm}{An n-dimensional vector containing the class labels including the missing-label denoted as NA.}
 
-\item{pi}{A g-dimensional  initial vector of the mixing proportions.}
+\item{pi}{A g-dimensional vector for the initial values of the mixing proportions.}
 
-\item{mu}{A initial  \eqn{p \times g} matrix of the location parameters.}
+\item{mu}{A \eqn{p \times g} matrix for the initial values of the location parameters.}
 
 \item{sigma}{A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.}
 
 \item{ncov}{Options of structure of sigma matrix;  the default value is 2;
 \code{ncov} = 1 for a common covariance matrix;
-\code{ncov} = 2 for the unequal  covariance/scale matrices.#'}
+\code{ncov} = 2 for the unequal  covariance/scale matrices.}
 
-\item{xi}{A 2-dimensional initial coefficient vector for a logistic function of the Shannon entropy.}
+\item{xi}{A 2-dimensional vector containing the initial values of the coefficients in the logistic function of the Shannon entropy.}
 
-\item{type}{Two types to fit to the model, 'ign' indicates fitting the model on the basis of the missing-label mechanism ignored, and 'full' indicates fitting the model on the basis of the missing-label mechanism}
+\item{type}{Three types of Gaussian mixture models, 'ign' indicates fitting the model to a partially classified sample on the basis of the likelihood that ignores the missing label mechanism,
+'full' indicates fitting the model to a partially classified sample on the basis of the full likelihood, taking into account the missing-label mechanism,
+and 'com' indicate fitting the model to a completed classified sample.}
 
 \item{iter.max}{Maximum number of iterations allowed. Defaults to 500}
 
@@ -56,7 +58,7 @@ EMMIXSSL(
 \item{xi}{Estimated  coefficient vector for a logistic function of the Shannon entropy}
 }
 \description{
-Fit normal distribution to the classified data and fit a Gaussian mixture model to the unclassified data based on the missing-data mechanism
+Fitting Gaussian mixture model to a complete classified dataset or a incomplete classified dataset with/without the missing-data mechanism.
 }
 \examples{
 n<-150

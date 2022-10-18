@@ -8,15 +8,23 @@
 #' @param ncov Options of structure of sigma matrix;  the default value is 2;
 #'  \code{ncov} = 1 for a common covariance matrix;
 #'  \code{ncov} = 2 for the unequal  covariance/scale matrices.
-#' @param type Two types to fit to the model, 'ign' indicates fitting the model on the basis of the missing-label mechanism ignored,and 'full' indicates fitting the model on the basis of the missing-label mechanism.
+#' @param type Three types to fit to the model, 'ign' indicates fitting the model on the basis of the likelihood that ignores the missing label mechanism,
+#' 'full' indicates that the model to be fitted on the basis of the full likelihood, taking into account the missing-label mechanism,
+#' and 'com' indicate that the model to be fitted to a completed classified sample.
 #'
 #' @export
 #'
 #' @return
 #'  \item{val}{Value of negatvie objective function.}
 #'
-neg_objective_function<-function(dat,zm,g,par,ncov=2,type=c('ign','full')){
+neg_objective_function<-function(dat,zm,g,par,ncov=2,type=c('ign','full','com')){
   Y<-dat
+  if(type=='com'){
+    type='ign'
+    if(any(is.na(zm))){
+      stop('Missing labels exist in the completed classified sample')
+    }
+  }
   if(ncov==1){
     p <- ncol(Y)
     parlist <- par2list(par=par,g=g, p=p, type = type,ncov=1)

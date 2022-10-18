@@ -9,7 +9,7 @@ par2list(par, g, p, ncov = 2, type = c("ign", "full"))
 \arguments{
 \item{par}{A vector with list information.}
 
-\item{g}{Number of multivariate Gaussian groups.}
+\item{g}{Number of multivariate normal classes.}
 
 \item{p}{Dimension of observation vecor.}
 
@@ -18,7 +18,9 @@ par2list(par, g, p, ncov = 2, type = c("ign", "full"))
 \code{ncov} = 2 for the unequal  covariance/scale matrices that
 \code{sigma} represents a list of g matrices with dimension \eqn{p\times p \times g}.}
 
-\item{type}{Two types to fit to the model, 'ign' indicates fitting the model on the basis of the missing-label mechanism ignored,and 'full' indicates fitting the model on the basis of the missing-label mechanism.}
+\item{type}{Three types to fit to the model, 'ign' indicates fitting the model on the basis of the likelihood that ignores the missing label mechanism,
+'full' indicates that the model to be fitted on the basis of the full likelihood, taking into account the missing-label mechanism,
+and 'com' indicate that the model to be fitted to a completed classified sample.}
 }
 \value{
 \item{parlist}{Return a list including \code{mu}, \code{pi}, \code{sigma} and \code{xi}.}

@@ -2,31 +2,30 @@
 % Please edit documentation in R/rmix.R
 \name{rmix}
 \alias{rmix}
-\title{Gaussian mixture model generator.}
+\title{Normal mixture model generator.}
 \usage{
 rmix(n, pi, mu, sigma, ncov = 2)
 }
 \arguments{
 \item{n}{Number of observations.}
 
-\item{pi}{A g-dimensional  initial vector of the mixing proportions.}
+\item{pi}{A g-dimensional vector for the initial values of the mixing proportions.}
 
-\item{mu}{A initial  \eqn{p \times g} matrix of the location parameters.}
+\item{mu}{A \eqn{p \times g} matrix for the initial values of the location parameters.}
 
 \item{sigma}{A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.}
 
 \item{ncov}{Options of structure of sigma matrix;  the default value is 2;
-\code{ncov} = 1 for a common covariance matrix that \code{sigma} is a \eqn{p\times p} matrix.
-\code{ncov} = 2 for the unequal  covariance/scale matrices that
-\code{sigma} represents a list of g matrices with dimension \eqn{p\times p \times g}.}
+\code{ncov} = 1 for a common covariance matrix;
+\code{ncov} = 2 for the unequal  covariance/scale matrices.}
 }
 \value{
 \item{Y}{An \eqn{n\times p} numeric matrix with samples drawn in rows.}
-\item{Z}{ An \eqn{n\times g} numeric matrix; each row represents zero-one indicator variables defining the known group of origin of each.}
-\item{clust}{An n-dimensional vector of group partition.}
+\item{Z}{ An \eqn{n\times g} numeric matrix; each row represents zero-one indicator variables defining the known class of origin of each.}
+\item{clust}{An n-dimensional vector of class partition.}
 }
 \description{
-Generate random observations from the Gaussian mixture distributions.
+Generate random observations from the normal mixture distributions.
 }
 \examples{
 n<-150

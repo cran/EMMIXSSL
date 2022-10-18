@@ -1,18 +1,18 @@
-#' Gaussian mixture model generator.
+#' Normal mixture model generator.
 #'
-#' Generate random observations from the Gaussian mixture distributions.
+#' Generate random observations from the normal mixture distributions.
 #' @param  n Number of observations.
 #' @param pi A g-dimensional  initial vector of the mixing proportions.
-#' @param mu A initial  \eqn{p \times g} matrix of the location parameters.
+#' @param pi A g-dimensional vector for the initial values of the mixing proportions.
+#' @param  mu A \eqn{p \times g} matrix for the initial values of the location parameters.
 #' @param sigma A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.
 #' @param ncov Options of structure of sigma matrix;  the default value is 2;
-#'  \code{ncov} = 1 for a common covariance matrix that \code{sigma} is a \eqn{p\times p} matrix.
-#'  \code{ncov} = 2 for the unequal  covariance/scale matrices that
-#'  \code{sigma} represents a list of g matrices with dimension \eqn{p\times p \times g}.
+#'  \code{ncov} = 1 for a common covariance matrix;
+#'  \code{ncov} = 2 for the unequal  covariance/scale matrices.
 #' @return
 #' \item{Y}{An \eqn{n\times p} numeric matrix with samples drawn in rows.}
-#' \item{Z}{ An \eqn{n\times g} numeric matrix; each row represents zero-one indicator variables defining the known group of origin of each.}
-#' \item{clust}{An n-dimensional vector of group partition.}
+#' \item{Z}{ An \eqn{n\times g} numeric matrix; each row represents zero-one indicator variables defining the known class of origin of each.}
+#' \item{clust}{An n-dimensional vector of class partition.}
 #' @examples
 #' n<-150
 #' pi<-c(0.25,0.25,0.25,0.25)
@@ -33,7 +33,7 @@ if(ncov==1){
   X=NULL
   for(j in 1:g){
     if (nn[j] > 0){
-      X1<- mvtnorm::rmvnorm(nn[j], mean=mu[,j], sigma=as.matrix(sigma)) # group 1 :a random number generator for the multivariate normal distribution
+      X1<- mvtnorm::rmvnorm(nn[j], mean=mu[,j], sigma=as.matrix(sigma)) # class 1 :a random number generator for the multivariate normal distribution
       X=rbind(X,X1)
     } else if (nn[j]==0){
       X1=matrix(NA,nn[j],p)
@@ -45,7 +45,7 @@ if(ncov==1){
     X=NULL
     for(j in 1:g){
       if (nn[j] > 0){
-        X1<- mvtnorm::rmvnorm(nn[j], mean=mu[,j], sigma=as.matrix(sigma[,,j])) # group 1 :a random number generator for the multivariate normal distribution
+        X1<- mvtnorm::rmvnorm(nn[j], mean=mu[,j], sigma=as.matrix(sigma[,,j])) # class 1 :a random number generator for the multivariate normal distribution
         X=rbind(X,X1)
       } else if (nn[j]==0){
         X1=matrix(NA,nn[j],p)

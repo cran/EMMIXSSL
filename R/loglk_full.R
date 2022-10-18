@@ -2,14 +2,14 @@
 #'
 #' Full log-likelihood function with both terms of ignoring and missing
 #' @param dat An \eqn{n\times p} matrix where each row represents an individual observation
-#' @param zm An n-dimensional vector of group partition including the missing-label, denoted as NA.
-#' @param pi A g-dimensional  initial vector of the mixing proportions.
-#' @param  mu A initial  \eqn{p \times g} matrix of the location parameters.
+#' @param zm An n-dimensional vector containing the class labels including the missing-label denoted as NA.
+#' @param pi A g-dimensional vector for the initial values of the mixing proportions.
+#' @param  mu A \eqn{p \times g} matrix for the initial values of the location parameters.
 #' @param sigma A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.
 #' @param ncov Options of structure of sigma matrix;  the default value is 2;
 #'  \code{ncov} = 1 for a common covariance matrix;
-#'  \code{ncov} = 2 for the unequal  covariance/scale matrices.#'
-#' @param xi A 2-dimensional coefficient vector for a logistic function of the Shannon entropy.
+#'  \code{ncov} = 2 for the unequal  covariance/scale matrices.
+#' @param xi A 2-dimensional vector containing the initial values of the coefficients in the logistic function of the Shannon entropy.
 #' @details
 #' The full log-likelihood function can be expressed as
 #' \deqn{

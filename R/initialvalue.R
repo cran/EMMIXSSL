@@ -2,8 +2,8 @@
 #'
 #' Inittial values for claculating the estimates based on solely on the classified features.
 #' @param dat An \eqn{n\times p} matrix where each row represents an individual observation
-#' @param zm An n-dimensional vector of group partition including the missing-label, denoted as NA.
-#' @param g Number of multivariate Gaussian groups.
+#' @param zm An n-dimensional vector containing the class labels including the missing-label denoted as NA.
+#' @param g Number of multivariate normal classes.
 #' @param ncov Options of structure of sigma matrix;  the default value is 2;
 #'  \code{ncov} = 1 for a common covariance matrix;
 #'  \code{ncov} = 2 for the unequal  covariance/scale matrices.

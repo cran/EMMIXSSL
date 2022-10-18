@@ -1,17 +1,19 @@
-#' Fitting Gaussian mixture model to the incompleted dataset with missing-data mechanism
+#' Fitting Gaussian mixture models
 #'
-#' Fit normal distribution to the classified data and fit a Gaussian mixture model to the unclassified data based on the missing-data mechanism
+#'Fitting Gaussian mixture model to a complete classified dataset or a incomplete classified dataset with/without the missing-data mechanism.
 #'
 #' @param dat An \eqn{n\times p} matrix where each row represents an individual observation
-#' @param zm An n-dimensional vector of group partition including the missing-label, denoted as NA.
-#' @param pi A g-dimensional  initial vector of the mixing proportions.
-#' @param  mu A initial  \eqn{p \times g} matrix of the location parameters.
+#' @param zm An n-dimensional vector containing the class labels including the missing-label denoted as NA.
+#' @param pi A g-dimensional vector for the initial values of the mixing proportions.
+#' @param  mu A \eqn{p \times g} matrix for the initial values of the location parameters.
 #' @param sigma A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.
 #' @param ncov Options of structure of sigma matrix;  the default value is 2;
 #'  \code{ncov} = 1 for a common covariance matrix;
-#'  \code{ncov} = 2 for the unequal  covariance/scale matrices.#'
-#' @param xi A 2-dimensional initial coefficient vector for a logistic function of the Shannon entropy.
-#' @param type Two types to fit to the model, 'ign' indicates fitting the model on the basis of the missing-label mechanism ignored, and 'full' indicates fitting the model on the basis of the missing-label mechanism
+#'  \code{ncov} = 2 for the unequal  covariance/scale matrices.
+#' @param xi A 2-dimensional vector containing the initial values of the coefficients in the logistic function of the Shannon entropy.
+#' @param type Three types of Gaussian mixture models, 'ign' indicates fitting the model to a partially classified sample on the basis of the likelihood that ignores the missing label mechanism,
+#' 'full' indicates fitting the model to a partially classified sample on the basis of the full likelihood, taking into account the missing-label mechanism,
+#' and 'com' indicate fitting the model to a completed classified sample.
 #' @param iter.max Maximum number of iterations allowed. Defaults to 500
 #' @param eval.max Maximum number of evaluations of the objective function allowed. Defaults to 500
 #' @param rel.tol Relative tolerance. Defaults to 1e-15
@@ -45,10 +47,17 @@
 #' }
 #'
 
-EMMIXSSL <- function(dat,zm,pi,mu,sigma,ncov,xi=NULL,type,iter.max=500,eval.max=500,rel.tol=1e-15,sing.tol=1e-20){
+EMMIXSSL <-function(dat,zm,pi,mu,sigma,ncov,xi=NULL,type,iter.max=500,eval.max=500,rel.tol=1e-6,sing.tol=1e-20)
+  {
   Y<-dat
   g<-length(pi)
   p=dim(Y)[2]
+  if(type=='com'){
+    type='ign'
+    if(any(is.na(zm))){
+    stop('Missing labels exist in the completed classified sample')
+    }
+  }
   par<-list2par(pi=pi,mu=mu,sigma=sigma,xi=xi,p=p,g=g,type=type,ncov=ncov)
   fullopt<-nlminb(start=par,objective=neg_objective_function,gradient = NULL, hessian = NULL,g=g,zm=zm,dat=dat,type=type,ncov=ncov,control=list(iter.max=iter.max, eval.max=eval.max, rel.tol=rel.tol, sing.tol=sing.tol))
   #print(fullopt)

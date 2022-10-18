@@ -7,21 +7,21 @@
 discriminant_beta(pi, mu, sigma)
 }
 \arguments{
-\item{pi}{A 2-dimensional initial vector of the mixing proportions.}
+\item{pi}{A g-dimensional vector for the initial values of the mixing proportions.}
 
-\item{mu}{A initial  \eqn{p \times 2} matrix of the location parameters.}
+\item{mu}{A \eqn{p \times g} matrix for the initial values of the location parameters.}
 
-\item{sigma}{A \eqn{p\times p} common covariance matrix}
+\item{sigma}{A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.}
 }
 \value{
 \item{beta0}{An intercept of discriminant function}
 \item{beta}{A coefficient of discriminant function}
 }
 \description{
-Discriminant function in the particular case of g=2 groups under the equal covariance consideration
+Discriminant function in the particular case of g=2 classes with an equal-covariance matrix
 }
 \details{
-Discriminant function in the particular case of g=2 groups under the equal covariance consideration can be expressed
+Discriminant function in the particular case of g=2 classes with an equal-covariance matrix can be expressed
 \deqn{d(y_i,\beta)=\beta_0+\beta_1 y_i,}
 where \eqn{\beta_0=\log\frac{\pi_1}{\pi_2}-\frac{1}{2}\frac{\mu_1^2-\mu_2^2}{\sigma^2}} and \eqn{\beta_1=\frac{\mu_1-\mu_2}{\sigma^2}}.
 }

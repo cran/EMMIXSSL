@@ -9,9 +9,9 @@ initialvalue(dat, zm, g, ncov = 2)
 \arguments{
 \item{dat}{An \eqn{n\times p} matrix where each row represents an individual observation}
 
-\item{zm}{An n-dimensional vector of group partition including the missing-label, denoted as NA.}
+\item{zm}{An n-dimensional vector containing the class labels including the missing-label denoted as NA.}
 
-\item{g}{Number of multivariate Gaussian groups.}
+\item{g}{Number of multivariate normal classes.}
 
 \item{ncov}{Options of structure of sigma matrix;  the default value is 2;
 \code{ncov} = 1 for a common covariance matrix;

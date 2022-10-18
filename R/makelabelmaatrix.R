@@ -1,9 +1,9 @@
 #' Label matrix
 #'
-#' Convert group indicator into a label maxtrix.
-#' @param clust An n-dimensional vector of group partition.
+#' Convert class indicator into a label maxtrix.
+#' @param clust An n-dimensional vector of class partition.
 #' @return
-#' \item{Z}{ A matrix of group indicator.}
+#' \item{Z}{ A matrix of class indicator.}
 #' @examples
 #' cluster<-c(1,1,2,2,3,3)
 #' label_maxtrix<-makelabelmatrix(cluster)

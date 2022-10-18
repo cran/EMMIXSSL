@@ -4,28 +4,37 @@
 \alias{list2par}
 \title{Transfer a list into a vector}
 \usage{
-list2par(p, g, pi, mu, sigma, ncov = 2, xi = NULL, type = c("ign", "full"))
+list2par(
+  p,
+  g,
+  pi,
+  mu,
+  sigma,
+  ncov = 2,
+  xi = NULL,
+  type = c("ign", "full", "com")
+)
 }
 \arguments{
 \item{p}{Dimension of observation vecor.}
 
-\item{g}{Number of multivariate Gaussian groups.}
+\item{g}{Number of multivariate normal classes.}
 
-\item{pi}{A g-dimensional  initial vector of the mixing proportions.}
+\item{pi}{A g-dimensional vector for the initial values of the mixing proportions.}
 
-\item{mu}{A initial  \eqn{p \times g} matrix of the location parameters.}
+\item{mu}{A \eqn{p \times g} matrix for the initial values of the location parameters.}
 
 \item{sigma}{A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.}
 
 \item{ncov}{Options of structure of sigma matrix;  the default value is 2;
-\code{ncov} = 1 for a common covariance matrix that \code{sigma} is a \eqn{p\times p} matrix.
-\code{ncov} = 2 for the unequal  covariance/scale matrices that
-\code{sigma} represents a list of g matrices with dimension \eqn{p\times p \times g}.}
+\code{ncov} = 1 for a common covariance matrix;
+\code{ncov} = 2 for the unequal  covariance/scale matrices.}
 
-\item{xi}{A 2-dimensional coefficient vector for a logistic function of the Shannon entropy.}
+\item{xi}{A 2-dimensional vector containing the initial values of the coefficients in the logistic function of the Shannon entropy.}
 
-\item{type}{Two types to fit to the model, 'ign' indicates fitting the model on the basis of the missing-label mechanism ignored,
-and 'full' indicates fitting the model on the basis of the missing-label mechanism}
+\item{type}{Three types to fit to the model, 'ign' indicates fitting the model on the basis of the likelihood that ignores the missing label mechanism,
+'full' indicates that the model to be fitted on the basis of the full likelihood, taking into account the missing-label mechanism,
+and 'com' indicate that the model to be fitted to a completed classified sample.}
 }
 \value{
 \item{par}{a vector including all list information}

@@ -7,13 +7,13 @@
 makelabelmatrix(clust)
 }
 \arguments{
-\item{clust}{An n-dimensional vector of group partition.}
+\item{clust}{An n-dimensional vector of class partition.}
 }
 \value{
-\item{Z}{ A matrix of group indicator.}
+\item{Z}{ A matrix of class indicator.}
 }
 \description{
-Convert group indicator into a label maxtrix.
+Convert class indicator into a label maxtrix.
 }
 \examples{
 cluster<-c(1,1,2,2,3,3)

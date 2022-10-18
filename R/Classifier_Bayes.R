@@ -1,10 +1,10 @@
-#' Posterior probability
+#' Classifier based on Bayes rule
 #'
-#' Get posterior probabilities of class membership
+#' A classifier based on Bayes rule, that is maximum a posterior probabilities of class membership
 #' @param dat An \eqn{n\times p} matrix where each row represents an individual observation
 #' @param n Number of observations.
 #' @param p Dimension of observation vecor.
-#' @param g Number of multivariate normal classes.
+#' @param g Number of classes.
 #' @param pi A g-dimensional vector for the initial values of the mixing proportions.
 #' @param  mu A \eqn{p \times g} matrix for the initial values of the location parameters.
 #' @param sigma A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.
@@ -12,7 +12,7 @@
 #'  \code{ncov} = 1 for a common covariance matrix;
 #'  \code{ncov} = 2 for the unequal  covariance/scale matrices.
 #' @return
-#' \item{clusprobs}{Posterior probabilities of class membership for the ith entity}
+#' \item{cluster}{A vector of the class membership.}
 #' @details
 #' The posterior probability can be expressed as
 #' \deqn{
@@ -20,6 +20,10 @@
 #' }
 #' where \eqn{\phi} is a normal probability function with mean \eqn{\mu_i} and covariance matrix \eqn{\Sigma_i},
 #' and \eqn{z_{ij}} is is a zero-one indicator variable denoting the class of origin.
+#' The Bayes' Classifier of allocation assigns an entity with feature vector \eqn{y_j} to Class \eqn{C_k} if
+#' \deqn{
+#' k= arg max_i \tau_i(y_j;\theta).
+#' }
 #' @export
 #' @import mvtnorm
 #' @examples
@@ -32,9 +36,9 @@
 #' sigma[,,4]<-diag(4,3)
 #' mu<-matrix(c(0.2,0.3,0.4,0.2,0.7,0.6,0.1,0.7,1.6,0.2,1.7,0.6),3,4)
 #' dat<-rmix(n=n,pi=pi,mu=mu,sigma=sigma,ncov=2)
-#'tau<-get_clusterprobs(dat=dat$Y,n=150,p=3,g=4,mu=mu,sigma=sigma,pi=pi,ncov=2)
+#'cluster<-Classifier_Bayes(dat=dat$Y,n=150,p=3,g=4,mu=mu,sigma=sigma,pi=pi,ncov=2)
 
-get_clusterprobs <- function(dat, n, p, g, pi,mu, sigma,ncov=2){
+Classifier_Bayes <- function(dat, n, p, g, pi,mu, sigma,ncov=2){
   logdens<-matrix(0,n,g)
 
   if(ncov==1){
@@ -51,5 +55,6 @@ get_clusterprobs <- function(dat, n, p, g, pi,mu, sigma,ncov=2){
   #logdens <- ddmix(dat=dat, n=n, p=p, g=g, distr=distr, mu=mu, sigma=sigma, dof=dof, delta=delta)
   logprobs <- t(t(logdens)+log(pi))
   clusprobs <- t(apply(logprobs, 1, normalise_logprob))
-  return(clusprobs)
+  cluster<-max.col(clusprobs)
+  return(cluster)
 }

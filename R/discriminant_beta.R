@@ -1,15 +1,15 @@
 #' Discriminant function
 #'
-#' Discriminant function in the particular case of g=2 groups under the equal covariance consideration
-#' @param pi A 2-dimensional initial vector of the mixing proportions.
-#' @param mu A initial  \eqn{p \times 2} matrix of the location parameters.
-#' @param sigma  A \eqn{p\times p} common covariance matrix
+#' Discriminant function in the particular case of g=2 classes with an equal-covariance matrix
+#' @param pi A g-dimensional vector for the initial values of the mixing proportions.
+#' @param  mu A \eqn{p \times g} matrix for the initial values of the location parameters.
+#' @param sigma A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.
 #' @return
 #' \item{beta0}{An intercept of discriminant function}
 #' \item{beta}{A coefficient of discriminant function}
 #' @export
 #' @details
-#' Discriminant function in the particular case of g=2 groups under the equal covariance consideration can be expressed
+#' Discriminant function in the particular case of g=2 classes with an equal-covariance matrix can be expressed
 #' \deqn{d(y_i,\beta)=\beta_0+\beta_1 y_i,}
 #' where \eqn{\beta_0=\log\frac{\pi_1}{\pi_2}-\frac{1}{2}\frac{\mu_1^2-\mu_2^2}{\sigma^2}} and \eqn{\beta_1=\frac{\mu_1-\mu_2}{\sigma^2}}.
 

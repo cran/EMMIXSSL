@@ -4,14 +4,13 @@
 #' @param dat An \eqn{n\times p} matrix where each row represents an individual observation
 #' @param n Number of observations.
 #' @param p Dimension of observation vecor.
-#' @param g Number of multivariate Gaussian groups.
-#' @param pi A g-dimensional initial vector of the mixing proportions.
-#' @param mu A initial  \eqn{p \times g} matrix of the location parameters.
+#' @param g Number of multivariate normal classes.
+#' @param pi A g-dimensional vector for the initial values of the mixing proportions.
+#' @param  mu A \eqn{p \times g} matrix for the initial values of the location parameters.
 #' @param sigma A \eqn{p\times p} covariance matrix if \code{ncov=1}, or a list of g covariance matrices with dimension \eqn{p\times p \times g} if \code{ncov=2}.
 #' @param ncov Options of structure of sigma matrix;  the default value is 2;
-#'  \code{ncov} = 1 for a common covariance matrix that \code{sigma} is a \eqn{p\times p} matrix.
-#'  \code{ncov} = 2 for the unequal  covariance/scale matrices that
-#'  \code{sigma} represents a list of g matrices with dimension \eqn{p\times p \times g}.
+#'  \code{ncov} = 1 for a common covariance matrix;
+#'  \code{ncov} = 2 for the unequal  covariance/scale matrices.
 #' @return
 #' \item{clusprobs}{The posterior probabilities of the i-th entity that belongs to the j-th group.}
 #' @export

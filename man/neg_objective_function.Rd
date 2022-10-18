@@ -4,7 +4,14 @@
 \alias{neg_objective_function}
 \title{Negative objective function for EMMIXSSL}
 \usage{
-neg_objective_function(dat, zm, g, par, ncov = 2, type = c("ign", "full"))
+neg_objective_function(
+  dat,
+  zm,
+  g,
+  par,
+  ncov = 2,
+  type = c("ign", "full", "com")
+)
 }
 \arguments{
 \item{dat}{An \eqn{n\times p} matrix where each row represents an individual observation}
@@ -19,7 +26,9 @@ neg_objective_function(dat, zm, g, par, ncov = 2, type = c("ign", "full"))
 \code{ncov} = 1 for a common covariance matrix;
 \code{ncov} = 2 for the unequal  covariance/scale matrices.}
 
-\item{type}{Two types to fit to the model, 'ign' indicates fitting the model on the basis of the missing-label mechanism ignored,and 'full' indicates fitting the model on the basis of the missing-label mechanism.}
+\item{type}{Three types to fit to the model, 'ign' indicates fitting the model on the basis of the likelihood that ignores the missing label mechanism,
+'full' indicates that the model to be fitted on the basis of the full likelihood, taking into account the missing-label mechanism,
+and 'com' indicate that the model to be fitted to a completed classified sample.}
 }
 \value{
 \item{val}{Value of negatvie objective function.}
